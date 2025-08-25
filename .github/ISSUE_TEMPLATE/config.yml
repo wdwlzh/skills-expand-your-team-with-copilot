@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🚀 GitHub Copilot Documentation
+    url: https://docs.github.com/en/copilot
+    about: Learn more about GitHub Copilot and how it can help with coding tasks
+  - name: 📚 Development Guide
+    url: https://github.com/wdwlzh/skills-expand-your-team-with-copilot/blob/main/docs/how-to-develop.md
+    about: Technical documentation for developers working on this project
+  - name: ❓ Ask a Question
+    url: https://github.com/wdwlzh/skills-expand-your-team-with-copilot/discussions
+    about: Ask questions and discuss ideas with the community

@@ -1,0 +1,129 @@
+name: "Add New Activity/Club"
+description: "Request to add a new extracurricular activity or club to the system"
+title: "Add new activity: [Activity Name]"
+labels: ["enhancement", "new-activity"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping expand our extracurricular offerings! Please provide all the details about the new activity below.
+        
+        **Important:** Fill out all required fields with complete information so our coding assistant can implement your request without needing additional clarification.
+
+  - type: input
+    id: activity-name
+    attributes:
+      label: "Activity Name"
+      description: "What should this activity be called? This will appear as the title on the website."
+      placeholder: "e.g., Drama Club, Coding Bootcamp, Environmental Club"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Activity Description"
+      description: "Describe what students will do in this activity. This helps students understand what to expect."
+      placeholder: "e.g., Learn acting techniques, perform in school plays, and develop public speaking confidence through theatrical exercises and performances."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: schedule-days
+    attributes:
+      label: "Meeting Days"
+      description: "Which days will this activity meet? Select all that apply."
+      options:
+        - label: "Monday"
+        - label: "Tuesday"
+        - label: "Wednesday"
+        - label: "Thursday"
+        - label: "Friday"
+        - label: "Saturday"
+        - label: "Sunday"
+
+  - type: input
+    id: start-time
+    attributes:
+      label: "Start Time"
+      description: "When does the activity start? Use 24-hour format (e.g., 15:30 for 3:30 PM)"
+      placeholder: "15:30"
+    validations:
+      required: true
+
+  - type: input
+    id: end-time
+    attributes:
+      label: "End Time"
+      description: "When does the activity end? Use 24-hour format (e.g., 17:00 for 5:00 PM)"
+      placeholder: "17:00"
+    validations:
+      required: true
+
+  - type: input
+    id: max-participants
+    attributes:
+      label: "Maximum Number of Participants"
+      description: "How many students can participate in this activity?"
+      placeholder: "15"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: difficulty-level
+    attributes:
+      label: "Difficulty Level (Optional)"
+      description: "Is this activity targeted at a specific skill level?"
+      options:
+        - "All levels (no restriction)"
+        - "Beginner"
+        - "Intermediate"
+        - "Advanced"
+      default: 0
+
+  - type: dropdown
+    id: activity-category
+    attributes:
+      label: "Activity Category"
+      description: "What type of activity is this? This helps with filtering and organization."
+      options:
+        - "Academic"
+        - "Sports"
+        - "Arts"
+        - "Community Service"
+        - "Technology"
+        - "Other"
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: special-requirements
+    attributes:
+      label: "Special Requirements or Notes"
+      description: "Any special equipment, prerequisites, or other important information?"
+      placeholder: "e.g., Students must bring their own art supplies, requires permission slip for field trips, etc."
+
+  - type: textarea
+    id: initial-participants
+    attributes:
+      label: "Students Already Interested (Optional)"
+      description: "If you already have students who want to join, list their email addresses (one per line)"
+      placeholder: |
+        student1@mergington.edu
+        student2@mergington.edu
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        **For the coding assistant:** This request should add a new activity to the initial_activities dictionary in `src/backend/database.py`. Make sure to:
+        1. Use the exact activity name as provided
+        2. Convert the selected days to a proper days array
+        3. Create both a human-readable schedule string and structured schedule_details
+        4. Set max_participants as an integer
+        5. Initialize participants as an empty array (or with the provided emails)
+        6. Add difficulty level only if not "All levels"
+        7. Follow the existing data structure format exactly

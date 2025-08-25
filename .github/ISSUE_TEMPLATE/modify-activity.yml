@@ -1,0 +1,125 @@
+name: "Modify Existing Activity"
+description: "Request changes to an existing activity's schedule, capacity, or details"
+title: "Update activity: [Activity Name]"
+labels: ["enhancement", "activity-update"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Need to make changes to an existing activity? Please provide the current activity name and what changes you'd like to make.
+        
+        **Important:** Only fill out the fields you want to change. Leave others blank to keep them as they are.
+
+  - type: dropdown
+    id: existing-activity
+    attributes:
+      label: "Activity to Modify"
+      description: "Which existing activity needs to be updated?"
+      options:
+        - "Chess Club"
+        - "Programming Class"
+        - "Soccer Team"
+        - "Basketball Team"
+        - "Art Club"
+        - "Math Olympiad"
+        - "Debate Team"
+        - "Weekend Robotics Workshop"
+        - "Science Olympiad"
+        - "Sunday Chess Tournament"
+        - "Manga Maniacs"
+        - "Other (specify in comments)"
+    validations:
+      required: true
+
+  - type: input
+    id: new-activity-name
+    attributes:
+      label: "New Activity Name (Optional)"
+      description: "Only fill this if you want to rename the activity"
+      placeholder: "Leave blank to keep current name"
+
+  - type: textarea
+    id: new-description
+    attributes:
+      label: "New Description (Optional)"
+      description: "Only fill this if you want to change the activity description"
+      placeholder: "Leave blank to keep current description"
+
+  - type: checkboxes
+    id: new-schedule-days
+    attributes:
+      label: "New Meeting Days (Optional)"
+      description: "Only select days if you want to change the schedule. Leave all unchecked to keep current schedule."
+      options:
+        - label: "Monday"
+        - label: "Tuesday"
+        - label: "Wednesday"
+        - label: "Thursday"
+        - label: "Friday"
+        - label: "Saturday"
+        - label: "Sunday"
+
+  - type: input
+    id: new-start-time
+    attributes:
+      label: "New Start Time (Optional)"
+      description: "Only fill this if changing start time. Use 24-hour format (e.g., 15:30 for 3:30 PM)"
+      placeholder: "Leave blank to keep current time"
+
+  - type: input
+    id: new-end-time
+    attributes:
+      label: "New End Time (Optional)"
+      description: "Only fill this if changing end time. Use 24-hour format (e.g., 17:00 for 5:00 PM)"
+      placeholder: "Leave blank to keep current time"
+
+  - type: input
+    id: new-max-participants
+    attributes:
+      label: "New Maximum Participants (Optional)"
+      description: "Only fill this if you want to change the capacity"
+      placeholder: "Leave blank to keep current capacity"
+
+  - type: dropdown
+    id: new-difficulty-level
+    attributes:
+      label: "New Difficulty Level (Optional)"
+      description: "Only change this if you want to modify the difficulty level"
+      options:
+        - "No change"
+        - "All levels (remove difficulty restriction)"
+        - "Beginner"
+        - "Intermediate"
+        - "Advanced"
+      default: 0
+
+  - type: textarea
+    id: reason-for-change
+    attributes:
+      label: "Reason for Change"
+      description: "Why are these changes needed? This helps us understand the context."
+      placeholder: "e.g., Student feedback suggests we need more time, scheduling conflict with another event, increased interest requires higher capacity"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: urgent
+    attributes:
+      label: "Priority"
+      options:
+        - label: "This change is urgent and needed soon"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        **For the coding assistant:** This request should modify the existing activity in the initial_activities dictionary in `src/backend/database.py`. Make sure to:
+        1. Find the activity by the exact name provided in "Activity to Modify"
+        2. Only update fields that have been filled out (non-empty values)
+        3. For schedule changes, update both the human-readable schedule string and schedule_details object
+        4. Preserve existing participants and other data that wasn't requested to change
+        5. Handle the case where "Other" is selected by looking for the activity name in the reason field
+        6. Validate that time changes make sense (end time after start time)
+        7. Follow the existing data structure format exactly
