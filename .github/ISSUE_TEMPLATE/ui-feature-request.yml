@@ -1,0 +1,137 @@
+name: "UI Improvement or New Feature"
+description: "Request new features, interface improvements, or enhancements to the website"
+title: "Feature request: [Brief description]"
+labels: ["enhancement", "ui-improvement"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea to make the website better for students and teachers? Please describe what you'd like to see!
+        
+        **Note:** The more specific you are about what you want and why, the easier it will be for our coding assistant to implement your request.
+
+  - type: dropdown
+    id: improvement-type
+    attributes:
+      label: "Type of Improvement"
+      description: "What category does your request fall into?"
+      options:
+        - "New Filter or Search Feature"
+        - "Visual/Design Enhancement"
+        - "New View or Display Mode"
+        - "User Interface Improvement"
+        - "Accessibility Enhancement"
+        - "Performance Improvement"
+        - "Other Enhancement"
+    validations:
+      required: true
+
+  - type: input
+    id: feature-title
+    attributes:
+      label: "Feature Title"
+      description: "Give your feature request a clear, concise title"
+      placeholder: "e.g., Dark Mode Toggle, Calendar View, Activity Difficulty Filter"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-situation
+    attributes:
+      label: "Current Situation"
+      description: "Describe how things work now and what limitations exist"
+      placeholder: "e.g., The website only has a light theme, which students find hard to use in dark environments"
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired-outcome
+    attributes:
+      label: "What You Want to See"
+      description: "Describe exactly what you want the new feature to do"
+      placeholder: "e.g., Add a toggle button in the top right that switches between light and dark themes. The dark theme should have a dark background with light text."
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-benefit
+    attributes:
+      label: "How This Helps Students/Teachers"
+      description: "Explain why this improvement is important and who it benefits"
+      placeholder: "e.g., Students often use the website in the evening and find dark mode easier on their eyes. This would make the site more comfortable to use."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: affected-areas
+    attributes:
+      label: "What parts of the website should this affect?"
+      description: "Check all areas where this feature should work"
+      options:
+        - label: "Main activity list page"
+        - label: "Activity filter sidebar"
+        - label: "Registration modal/popup"
+        - label: "Login modal/popup"
+        - label: "Header/navigation area"
+        - label: "Entire website"
+
+  - type: dropdown
+    id: priority-level
+    attributes:
+      label: "How important is this?"
+      description: "Help us prioritize your request"
+      options:
+        - "Nice to have - would be cool but not essential"
+        - "Useful - would improve the experience"
+        - "Important - addresses a real problem"
+        - "Critical - essential for proper use"
+      default: 1
+
+  - type: textarea
+    id: implementation-ideas
+    attributes:
+      label: "Implementation Ideas (Optional)"
+      description: "If you have specific ideas about HOW this should work, share them here"
+      placeholder: "e.g., The toggle could be next to the login button, or use a sun/moon icon, or save the preference in browser storage"
+
+  - type: textarea
+    id: examples-inspiration
+    attributes:
+      label: "Examples or Inspiration (Optional)"
+      description: "Know of other websites that do this well? Share links or describe what you like about them"
+      placeholder: "e.g., GitHub's dark mode toggle works really well, or I like how Netflix shows content in a grid vs list view"
+
+  - type: checkboxes
+    id: mobile-consideration
+    attributes:
+      label: "Mobile Considerations"
+      options:
+        - label: "This feature should work well on mobile devices too"
+        - label: "This is primarily for desktop use"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        **For the coding assistant:** This is a UI/UX enhancement request. Consider these implementation guidelines:
+        
+        **Files to potentially modify:**
+        - `src/static/index.html` for HTML structure changes
+        - `src/static/styles.css` for styling updates
+        - `src/static/app.js` for JavaScript functionality
+        - Backend files only if new data handling is needed
+        
+        **Key principles:**
+        - Keep the interface simple and user-friendly for non-technical teachers
+        - Maintain existing functionality while adding new features
+        - Follow the existing code style and patterns
+        - Consider responsive design for mobile users
+        - Test that the feature works with teacher authentication
+        
+        **Before implementing:**
+        1. Understand exactly what the user wants and why
+        2. Plan which files need changes
+        3. Consider how this affects existing features
+        4. Think about edge cases and error handling

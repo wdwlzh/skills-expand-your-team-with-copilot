@@ -1,0 +1,159 @@
+name: "Student Management Request"
+description: "Request to add, remove, or manage student enrollments in activities"
+title: "Student management: [Brief description]"
+labels: ["student-management"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Need to make changes to student enrollments? Use this form to add students to activities, remove them, or make other enrollment changes.
+        
+        **Note:** For bulk changes or complex requests, please be as specific as possible about what you need.
+
+  - type: dropdown
+    id: request-type
+    attributes:
+      label: "What do you need to do?"
+      description: "Select the type of student management task"
+      options:
+        - "Add students to an activity"
+        - "Remove students from an activity"
+        - "Move students between activities"
+        - "Clear all students from an activity"
+        - "Add multiple students to multiple activities"
+        - "Other student management task"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: target-activity
+    attributes:
+      label: "Primary Activity Involved"
+      description: "Which activity is this request mainly about?"
+      options:
+        - "Chess Club"
+        - "Programming Class"
+        - "Soccer Team"
+        - "Basketball Team"
+        - "Art Club"
+        - "Math Olympiad"
+        - "Debate Team"
+        - "Weekend Robotics Workshop"
+        - "Science Olympiad"
+        - "Sunday Chess Tournament"
+        - "Manga Maniacs"
+        - "Multiple activities (explain in details)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: student-emails
+    attributes:
+      label: "Student Email Addresses"
+      description: "List the email addresses of students involved in this request (one per line)"
+      placeholder: |
+        student1@mergington.edu
+        student2@mergington.edu
+        student3@mergington.edu
+    validations:
+      required: true
+
+  - type: textarea
+    id: detailed-request
+    attributes:
+      label: "Detailed Request"
+      description: "Explain exactly what changes you need made"
+      placeholder: |
+        e.g., 
+        - Add the 3 students listed above to Chess Club
+        - Remove john@mergington.edu from Soccer Team and add him to Basketball Team
+        - Clear all current students from Art Club so we can start fresh next semester
+    validations:
+      required: true
+
+  - type: input
+    id: second-activity
+    attributes:
+      label: "Second Activity (if applicable)"
+      description: "If moving students between activities, what's the destination activity?"
+      placeholder: "e.g., Basketball Team"
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: "Reason for Changes"
+      description: "Why are these enrollment changes needed?"
+      placeholder: "e.g., Students requested to switch activities, semester change, student transferred schools, etc."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: capacity-check
+    attributes:
+      label: "Capacity Considerations"
+      options:
+        - label: "I've checked that the target activity has enough space for new students"
+        - label: "Please increase the activity capacity if needed to accommodate these students"
+        - label: "This change doesn't affect capacity (removing students only)"
+
+  - type: dropdown
+    id: timing
+    attributes:
+      label: "When do these changes need to take effect?"
+      options:
+        - "Immediately"
+        - "Next week"
+        - "Next semester/session"
+        - "Specific date (mention in additional notes)"
+      default: 0
+
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: "Additional Notes"
+      description: "Any other information that would be helpful?"
+      placeholder: "e.g., These students are all in the same grade, need to notify parents, specific deadline requirements"
+
+  - type: checkboxes
+    id: confirmation-needed
+    attributes:
+      label: "Follow-up"
+      options:
+        - label: "Please confirm when the changes are complete"
+        - label: "No confirmation needed"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        **For the coding assistant:** This is a student enrollment management request. Handle it carefully:
+        
+        **For adding students:**
+        1. Update the `participants` array in the relevant activity in `src/backend/database.py`
+        2. Check `max_participants` capacity before adding - if exceeded, either:
+           - Increase capacity if teacher requested it
+           - Add students anyway if teacher confirmed capacity check
+           - Report the capacity issue if unclear
+        3. Validate email addresses follow the @mergington.edu pattern
+        
+        **For removing students:**
+        1. Remove the specified email addresses from the `participants` array
+        2. Verify the email addresses exist before attempting removal
+        
+        **For moving students:**
+        1. Remove from source activity's participants array
+        2. Add to destination activity's participants array  
+        3. Check destination activity capacity
+        
+        **For clearing activity:**
+        1. Set the `participants` array to empty: `[]`
+        2. Confirm this is really what was requested
+        
+        **Important considerations:**
+        - Always preserve existing participants that aren't mentioned in the request
+        - Maintain the exact email address format
+        - If "Multiple activities" was selected, look for activity names in the detailed request
+        - Double-check the request type matches the detailed description
+        - Handle any capacity increases by updating `max_participants` if requested

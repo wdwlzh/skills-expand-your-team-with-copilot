@@ -1,0 +1,98 @@
+name: "Other Request"
+description: "For requests that don't fit the other categories"
+title: "Request: [Brief description]"
+labels: ["question", "enhancement"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a request that doesn't fit our other templates? Please describe what you need here.
+        
+        **Tip:** If your request is about activities, UI improvements, bugs, or student management, please use one of the specific templates instead - they'll help get your request handled faster!
+
+  - type: textarea
+    id: request-description
+    attributes:
+      label: "What do you need?"
+      description: "Describe your request in detail"
+      placeholder: "Please be as specific as possible about what you want and why you need it"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: request-category
+    attributes:
+      label: "What category best describes this request?"
+      options:
+        - "Data/Information Request"
+        - "System Configuration"
+        - "Documentation or Help"
+        - "Training or Support"
+        - "Policy or Process Question"
+        - "Technical Question"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-situation
+    attributes:
+      label: "Current Situation"
+      description: "Describe how things work now (if applicable)"
+      placeholder: "What currently exists or what problem are you facing?"
+
+  - type: textarea
+    id: desired-outcome
+    attributes:
+      label: "What You Want to Achieve"
+      description: "Describe the end result you're looking for"
+      placeholder: "What would success look like for this request?"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: "How urgent is this request?"
+      options:
+        - "Not urgent - whenever convenient"
+        - "Would like it soon"
+        - "Needed within a week"
+        - "Urgent - needed ASAP"
+      default: 0
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: "Additional Context"
+      description: "Any other information that would help us understand and fulfill your request?"
+      placeholder: "Background information, constraints, preferences, or related issues"
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        **For the coding assistant:** This is a general request that may or may not require code changes. Before proceeding:
+        
+        1. **Analyze the request carefully** to understand what the teacher actually needs
+        2. **Determine if this requires code changes** or if it's a question/support request
+        3. **Check if this should have used a different template** - if so, gently suggest the appropriate template
+        
+        **If code changes are needed:**
+        - Follow the same principles as other templates
+        - Ask for clarification if the request is unclear
+        - Consider suggesting a more specific template for future similar requests
+        
+        **If no code changes are needed:**
+        - Provide helpful information or documentation
+        - Guide the teacher to appropriate resources
+        - Suggest better ways to get support for their type of request
+        
+        **Common non-coding requests might include:**
+        - Questions about how to use existing features
+        - Requests for reports or data exports  
+        - Policy questions about student enrollment
+        - Training requests
+        - General technical support
